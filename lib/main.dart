@@ -5,9 +5,11 @@ import 'package:mean_app/screens/tabs_screen.dart';
 
 import 'screens/category_meals_screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
