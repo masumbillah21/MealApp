@@ -3,7 +3,10 @@ import 'package:mean_app/data/dummy_data.dart';
 
 class MealDetailScreen extends StatelessWidget {
   static const routeName = '/meal-detail';
-  const MealDetailScreen({Key? key}) : super(key: key);
+  final Function favoriteMeal;
+  final Function isFavorite;
+  const MealDetailScreen(this.favoriteMeal, this.isFavorite, {Key? key})
+      : super(key: key);
 
   Widget buildSectionTitle(BuildContext ctx, String text) {
     return Container(
@@ -22,8 +25,8 @@ class MealDetailScreen extends StatelessWidget {
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(10),
       ),
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       height: 150,
       width: 300,
       child: child,
@@ -37,12 +40,12 @@ class MealDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('${selectedMeal.title}'),
+        title: Text(selectedMeal.title),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 300,
               width: double.infinity,
               child: Image.network(
@@ -89,10 +92,8 @@ class MealDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pop(mealId);
-        },
-        child: const Icon(Icons.delete),
+        onPressed: () => favoriteMeal(mealId),
+        child: Icon(isFavorite(mealId) ? Icons.star : Icons.star_border),
       ),
     );
   }
